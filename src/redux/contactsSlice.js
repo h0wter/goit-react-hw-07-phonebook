@@ -9,7 +9,11 @@ const contactsList = [
 
 const contactsSlice = createSlice({
   name: 'contacts',
-  initialState: contactsList,
+  initialState: {
+    items: contactsList,
+    isLoading: false,
+    error: null,
+  },
   reducers: {
     addContact(state, action) {
       state.push(action.payload);
