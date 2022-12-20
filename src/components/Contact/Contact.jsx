@@ -1,15 +1,12 @@
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import { ContactItem, ContactData } from './Contact.styled';
 import { Button } from 'components/Button/Button';
 import { deleteContact } from 'redux/operations';
-import { getIsLoading } from 'redux/selectors';
 
 export const Contact = ({ contact }) => {
   const dispatch = useDispatch();
   const { name, phone, id } = contact;
-  const isLoading = useSelector(getIsLoading);
-  console.log(isLoading);
   return (
     <ContactItem>
       <ContactData>
