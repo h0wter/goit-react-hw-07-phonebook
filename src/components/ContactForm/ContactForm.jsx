@@ -1,12 +1,11 @@
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { nanoid } from 'nanoid';
 import { Formik, Field } from 'formik';
 import { Box } from 'components/Box';
 import { StyledForm } from './ContactForm.styled';
 import { Button } from 'components/Button/Button';
-import { addContact } from 'redux/contactsSlice';
 import { getContacts } from 'redux/selectors';
+import { addContact } from 'redux/operations';
 
 export const ContactForm = () => {
   const [name, setName] = useState('');
@@ -25,7 +24,7 @@ export const ContactForm = () => {
       return;
     }
 
-    dispatch(addContact({ name, number, id: nanoid() }));
+    dispatch(addContact({ name, phone: number }));
   };
 
   const onInputChange = e => {
