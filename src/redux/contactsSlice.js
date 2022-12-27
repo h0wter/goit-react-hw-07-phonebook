@@ -6,6 +6,7 @@ const contactsSlice = createSlice({
   initialState: {
     items: [],
     isLoading: false,
+    deletingId: null,
     error: null,
   },
   extraReducers: builder => {
@@ -16,11 +17,18 @@ const contactsSlice = createSlice({
       .addCase(addContact.fulfilled, (state, action) => {
         state.items.push(action.payload);
       })
+      .addCase(deleteContact.pending, (state, action) => {
+        state.deletingId = action.meta.arg;
+      })
       .addCase(deleteContact.fulfilled, (state, action) => {
         const index = state.items.findIndex(
           contact => contact.id === action.payload.id
         );
         state.items.splice(index, 1);
+        state.deletingId = null;
+      })
+      .addCase(deleteContact.rejected, state => {
+        state.deletingId = null;
       })
       .addMatcher(
         isAnyOf(
